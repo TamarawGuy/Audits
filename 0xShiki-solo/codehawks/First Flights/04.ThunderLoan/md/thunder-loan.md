@@ -10,7 +10,7 @@ header-includes:
         \includegraphics[width=0.5\textwidth]{logo.jpg} 
     \end{figure}
     \vspace*{1cm}
-    {\Huge\bfseries Password Store Report\par}
+    {\Huge\bfseries Thunder Loan Report\par}
     \vspace{1cm}
     {\Large Performed by: \itshape 0xShiki\par}
 \end{titlepage}
@@ -155,8 +155,11 @@ src/upgradedProtocol/ThunderLoanUpgraded.sol
 ## [H-1] Storage collision during upgrade
 
 ### Relevant GitHub Links
+
+```
 - https://github.com/Cyfrin/2023-11-Thunder-Loan/blob/8539c83865eb0d6149e4d70f37a35d9e72ac7404/src/protocol/ThunderLoan.sol#L96C1-L100C1
 - https://github.com/Cyfrin/2023-11-Thunder-Loan/blob/8539c83865eb0d6149e4d70f37a35d9e72ac7404/src/upgradedProtocol/ThunderLoanUpgraded.sol#L95C5-L101C1
+```
 
 ### Description:
 At storage slot 1, 2 and 3 of `ThunderLoan.sol` contract are `s_feePrecision`, `s_flashLoanFee` and `s_currentlyFlashLoaning` respectively. In the `ThunderLoanUpgraded` contract at storage slot 1 and 2 are `s_flashLoanFee` and `s_currentlyFlashLoaning`. This is because in the upgradeable contract `s_feePrecision` is changed to a constant variable. In that way 2 things will happen:
@@ -203,7 +206,7 @@ Leave a blank storage slot if you are going to replace a storage variable to be 
 
 ### Relevant GitHub Links
 ```
-https://github.com/Cyfrin/2023-11-Thunder-Loan/blob/8539c83865eb0d6149e4d70f37a35d9e72ac7404/src/protocol/ThunderLoan.sol#L153-L154
+- https://github.com/Cyfrin/2023-11-Thunder-Loan/blob/8539c83865eb0d6149e4d70f37a35d9e72ac7404/src/protocol/ThunderLoan.sol#L153-L154
 ```
 
 ### Description
@@ -263,9 +266,9 @@ Manual Review
 
 ### Relevant GitHub Links
 ```
-https://github.com/Cyfrin/2023-11-Thunder-Loan/blob/8539c83865eb0d6149e4d70f37a35d9e72ac7404/src/protocol/ThunderLoan.sol#L248-L250
+- https://github.com/Cyfrin/2023-11-Thunder-Loan/blob/8539c83865eb0d6149e4d70f37a35d9e72ac7404/src/protocol/ThunderLoan.sol#L248-L250
 
-https://github.com/Cyfrin/2023-11-Thunder-Loan/blob/8539c83865eb0d6149e4d70f37a35d9e72ac7404/src/upgradedProtocol/ThunderLoanUpgraded.sol#L246-L248
+- https://github.com/Cyfrin/2023-11-Thunder-Loan/blob/8539c83865eb0d6149e4d70f37a35d9e72ac7404/src/upgradedProtocol/ThunderLoanUpgraded.sol#L246-L248
 ```
 
 ### Description
@@ -304,9 +307,9 @@ Consider adding logic to you contract for dealing with non-standard ERC20 tokens
 
 ### Relevant GitHub Links
 ```
-https://github.com/Cyfrin/2023-11-Thunder-Loan/blob/8539c83865eb0d6149e4d70f37a35d9e72ac7404/src/protocol/ThunderLoan.sol#L147-L156
+- https://github.com/Cyfrin/2023-11-Thunder-Loan/blob/8539c83865eb0d6149e4d70f37a35d9e72ac7404/src/protocol/ThunderLoan.sol#L147-L156
 
-https://github.com/Cyfrin/2023-11-Thunder-Loan/blob/8539c83865eb0d6149e4d70f37a35d9e72ac7404/src/protocol/ThunderLoan.sol#L180-L217
+- https://github.com/Cyfrin/2023-11-Thunder-Loan/blob/8539c83865eb0d6149e4d70f37a35d9e72ac7404/src/protocol/ThunderLoan.sol#L180-L217
 ```
 
 ### Description
@@ -381,7 +384,7 @@ Add a check in deposit() to make it impossible to use it in the same block of th
 
 ### Relevant GitHub Links
 ```
-https://github.com/Cyfrin/2023-11-Thunder-Loan/blob/8539c83865eb0d6149e4d70f37a35d9e72ac7404/src/protocol/ThunderLoan.sol#L227-L244
+- https://github.com/Cyfrin/2023-11-Thunder-Loan/blob/8539c83865eb0d6149e4d70f37a35d9e72ac7404/src/protocol/ThunderLoan.sol#L227-L244
 ```
 
 ### Description
@@ -424,9 +427,9 @@ Consider adding a check if a user holds that assetToken in the protocol, therefo
 
 ### Relevant GitHub Links
 ```
-https://github.com/Cyfrin/2023-11-Thunder-Loan/blob/8539c83865eb0d6149e4d70f37a35d9e72ac7404/src/protocol/ThunderLoan.sol#L201-L210
+- https://github.com/Cyfrin/2023-11-Thunder-Loan/blob/8539c83865eb0d6149e4d70f37a35d9e72ac7404/src/protocol/ThunderLoan.sol#L201-L210
 
-https://github.com/Cyfrin/2023-11-Thunder-Loan/blob/8539c83865eb0d6149e4d70f37a35d9e72ac7404/src/protocol/ThunderLoan.sol#L192
+- https://github.com/Cyfrin/2023-11-Thunder-Loan/blob/8539c83865eb0d6149e4d70f37a35d9e72ac7404/src/protocol/ThunderLoan.sol#L192
 ```
 
 ### Description:
@@ -576,7 +579,7 @@ Consider using a Chainlink Oracle for determining the price of the token.
 
 ### Relevant GitHub Links
 ```
-https://github.com/Cyfrin/2023-11-Thunder-Loan/blob/main/src/protocol/ThunderLoan.sol#147-156
+- https://github.com/Cyfrin/2023-11-Thunder-Loan/blob/main/src/protocol/ThunderLoan.sol#147-156
 ```
 
 ### Description
@@ -603,7 +606,7 @@ Implement logic to handle fee on transfer tokens, for example calculate the diff
 
 ### Relevant GitHub Links
 ```
-https://github.com/Cyfrin/2023-11-Thunder-Loan/blob/8539c83865eb0d6149e4d70f37a35d9e72ac7404/src/protocol/ThunderLoan.sol#L246
+- https://github.com/Cyfrin/2023-11-Thunder-Loan/blob/8539c83865eb0d6149e4d70f37a35d9e72ac7404/src/protocol/ThunderLoan.sol#L246
 ```
 
 ### Description

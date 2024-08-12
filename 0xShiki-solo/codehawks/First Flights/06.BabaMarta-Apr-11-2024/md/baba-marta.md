@@ -10,7 +10,7 @@ header-includes:
         \includegraphics[width=0.5\textwidth]{logo.jpg} 
     \end{figure}
     \vspace*{1cm}
-    {\Huge\bfseries Password Store Report\par}
+    {\Huge\bfseries Baba Marta Report\par}
     \vspace{1cm}
     {\Large Performed by: \itshape 0xShiki\par}
 \end{titlepage}
@@ -113,8 +113,9 @@ https://github.com/Cyfrin/2024-04-Baba-Marta
 ## <a id='H-01'></a>H-01. Users can increment their token count with no restriction by calling `MartenitsaToken::updateCountMartenitsaTokensOwner` function, causing to increase their HealthToken balance            
 
 ### Relevant GitHub Links
-	
+```	
 https://github.com/Cyfrin/2024-04-Baba-Marta/blob/5eaab7b51774d1083b926bf5ef116732c5a35cfd/src/MartenitsaToken.sol#L62
+```
 
 ## Vulnerability Details
 The purpose of the `HealthToken` token is to serve as a reward mechanism for participants who have more than 3 MartenitsaTokens. For every 3 different MartenitsaTokens they receive 1 HealthToken. Users can also join an event if they have sufficient amount of `HealthToken` tokens, where they can become producers during the event and be able to sell their `MartenitsaToken` NFTs. However, users can update `MartenitsaToken::countMartenitsaTokensOwner` mapping without restriction by calling `updateCountMartenitsaTokensOwner`, because it's marked as an `external` function. In that way, users can manipulate the contract by:
@@ -182,8 +183,6 @@ Consider implementing a different logic in `MartenitsaToken` and `MartenitsaMark
 # Medium
 ## <a id='M-01'></a>M-01. User can transfer `MartenitsaToken` NFT by calling `ERC721::transferFrom` function, causing the internal logic of user's martenitsa count to break            
 
-
-
 ## Vulnerability Details
 The `MartenitsaToken` contract inherits the `ERC721` standard to manage the ownership of NFTs. By using the `ERC721::transferFrom` function, a user can transfer an NFT to another user. However, in this way,  the user's martenitsa count is not updated correctly in the contract, leading to inconsistencies in the contract state.
 
@@ -248,8 +247,9 @@ Consider overriding the `transferFrom` function in the `MartenitsaToken` contrac
 ## <a id='M-02'></a>M-02. `MartenitsaVoting::announceWinner` function miscalculates the winner of a voting event, causing the first one in the `MartenitsaVoting::tokenIds` array to always be the winner            
 
 ### Relevant GitHub Links
-	
+```
 https://github.com/Cyfrin/2024-04-Baba-Marta/blob/5eaab7b51774d1083b926bf5ef116732c5a35cfd/src/MartenitsaVoting.sol#L57
+```
 
 ## Vulnerability Details
 The `MartenitsaVoting::announceWinner` function is used to calculate the winner of a voting event. The winner is the NFT with the most votes. However, if 2 or more NFTs have the same amount of votes, the first one in the `MartenitsaVoting::tokenIds` array will always be the winner. This is because the `MartenitsaVoting::announceWinner` function uses the `maxVotes` variable to store the maximum number of votes, and the `winner` variable to store the winner NFT ID. If the current NFT has more votes than the `maxVotes` variable, the `winner` variable is updated with the current NFT ID. However, if the current NFT has the same amount of votes as the `maxVotes` variable, the `winner` variable is not updated, and the first NFT in the `MartenitsaVoting::tokenIds` array is always the winner.
@@ -312,8 +312,9 @@ Consider implementing a different logic for `MartenitsaVoting::announceWinner` f
 ## <a id='L-01'></a>L-01. `MartenitsaVoting::announceWinner` function does not check if there are no votes, causing a participant to become a winner and receive a HealthToken            
 
 ### Relevant GitHub Links
-	
+```
 https://github.com/Cyfrin/2024-04-Baba-Marta/blob/5eaab7b51774d1083b926bf5ef116732c5a35cfd/src/MartenitsaVoting.sol#L57
+```
 
 ## Vulnerability Details
 Users can vote for the best `MartenitsaToken` NFT, which is listed for sale on the `MartenitsaMarketplace`. The `MartenitsaVoting::announceWinner` function is used to calculate the winner of the voting event. The winner is the NFT with the most votes. However, the `MartenitsaVoting::announceWinner` function does not check if there are no votes, which a participant can receive a `HealthToken` even if there are no votes for the winner's NFT, and become the winner.

@@ -10,7 +10,7 @@ header-includes:
         \includegraphics[width=0.5\textwidth]{logo.jpg} 
     \end{figure}
     \vspace*{1cm}
-    {\Huge\bfseries Password Store Report\par}
+    {\Huge\bfseries Kitty Connect Report\par}
     \vspace{1cm}
     {\Large Performed by: \itshape 0xShiki\par}
 \end{titlepage}
@@ -101,8 +101,10 @@ https://github.com/Cyfrin/2024-03-kitty-connect
 ## <a id='H-01'></a>H-01. `KittyConnect::_updateOwnershipInfo` function doesn't update the ownership info of the kitty's previous owner, leads to confusion in managing and querying the ownership of NFTs.            
 
 ### Relevant GitHub Links
-	
+
+```
 https://github.com/Cyfrin/2024-03-kitty-connect/blob/c0a6f2bb5c853d7a470eb684e1954dba261fb167/src/KittyConnect.sol#L181
+```
 
 ## Vulnerability Details
 When `KittyConnect::safeTransferFrom` function is called, it updates the ownership information of the NFT by calling `KittyConnect::_updateOwnershipInfo`. However, the function does not update the `KittyConnect::s_ownerToCatsTokenId` mapping, where the owner of the NFT is stored.
@@ -186,7 +188,7 @@ function _updateOwnershipInfo(
 ## <a id='G-01'></a>G-01. Using `require` instead of custom errors, leads to gas inefficiency.            
 
 ### Relevant GitHub Links
-	
+```
 https://github.com/Cyfrin/2024-03-kitty-connect/blob/c0a6f2bb5c853d7a470eb684e1954dba261fb167/src/KittyConnect.sol#L46
 
 https://github.com/Cyfrin/2024-03-kitty-connect/blob/c0a6f2bb5c853d7a470eb684e1954dba261fb167/src/KittyConnect.sol#L51
@@ -198,6 +200,7 @@ https://github.com/Cyfrin/2024-03-kitty-connect/blob/c0a6f2bb5c853d7a470eb684e19
 https://github.com/Cyfrin/2024-03-kitty-connect/blob/c0a6f2bb5c853d7a470eb684e1954dba261fb167/src/KittyConnect.sol#L118
 
 https://github.com/Cyfrin/2024-03-kitty-connect/blob/c0a6f2bb5c853d7a470eb684e1954dba261fb167/src/KittyConnect.sol#L129
+```
 
 ## Description
 All of the error handling in the `KittyConnect` contract is done using the require function. Since Solidity v0.8.4, custom reverts were presented, which are more gas efficient than using `require`.
